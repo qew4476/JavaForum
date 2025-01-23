@@ -38,6 +38,18 @@ public class User {
     @Column(name = "create_time")
     private String createTime;
 
+    public User(String username, String password, String salt, String email, int type, int status, String activationCode, String headerUrl, String createTime) {
+        this.username = username;
+        this.password = password;
+        this.salt = salt;
+        this.email = email;
+        this.type = type;
+        this.status = status;
+        this.activationCode = activationCode;
+        this.headerUrl = headerUrl;
+        this.createTime = createTime;
+    }
+
     public int getId() {
         return id;
     }
