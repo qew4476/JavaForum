@@ -39,6 +39,36 @@ public class User {
     @Column(name = "create_time")
     private Instant createTime;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", email='" + email + '\'' +
+                ", type=" + type +
+                ", status=" + status +
+                ", activationCode='" + activationCode + '\'' +
+                ", headerUrl='" + headerUrl + '\'' +
+                ", createTime=" + createTime +
+                '}';
+    }
+
+    public User() {
+    }
+    public User(String username, String password, String salt, String email, Integer type, Integer status, String activationCode, String headerUrl, Instant createTime) {
+        this.username = username;
+        this.password = password;
+        this.salt = salt;
+        this.email = email;
+        this.type = type;
+        this.status = status;
+        this.activationCode = activationCode;
+        this.headerUrl = headerUrl;
+        this.createTime = createTime;
+    }
+
     public Integer getId() {
         return id;
     }
