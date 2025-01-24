@@ -2,59 +2,48 @@ package com.java.forum.forum.entity;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
+
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "forum_db")
 public class User {
-
     @Id
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    private Integer id;
 
-    @Column(name = "username")
+    @Column(name = "username", length = 50)
     private String username;
 
-    @Column(name = "password")
+    @Column(name = "password", length = 50)
     private String password;
 
-    @Column(name = "salt")
+    @Column(name = "salt", length = 50)
     private String salt;
 
-    @Column(name = "email")
+    @Column(name = "email", length = 100)
     private String email;
 
     @Column(name = "type")
-    private int type;
+    private Integer type;
 
     @Column(name = "status")
-    private int status;
+    private Integer status;
 
-    @Column(name = "activation_code")
+    @Column(name = "activation_code", length = 100)
     private String activationCode;
 
-    @Column(name = "header_url")
+    @Column(name = "header_url", length = 200)
     private String headerUrl;
 
     @Column(name = "create_time")
-    private String createTime;
+    private Instant createTime;
 
-    public User(String username, String password, String salt, String email, int type, int status, String activationCode, String headerUrl, String createTime) {
-        this.username = username;
-        this.password = password;
-        this.salt = salt;
-        this.email = email;
-        this.type = type;
-        this.status = status;
-        this.activationCode = activationCode;
-        this.headerUrl = headerUrl;
-        this.createTime = createTime;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -90,19 +79,19 @@ public class User {
         this.email = email;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -122,27 +111,12 @@ public class User {
         this.headerUrl = headerUrl;
     }
 
-    public String getCreateTime() {
+    public Instant getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Instant createTime) {
         this.createTime = createTime;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
-                ", email='" + email + '\'' +
-                ", type=" + type +
-                ", status=" + status +
-                ", activationCode='" + activationCode + '\'' +
-                ", headerUrl='" + headerUrl + '\'' +
-                ", createTime='" + createTime + '\'' +
-                '}';
-    }
 }
