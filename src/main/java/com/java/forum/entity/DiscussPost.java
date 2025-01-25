@@ -23,10 +23,10 @@ public class DiscussPost {
     private String content;
 
     @Column(name = "type")
-    private Integer type;
+    private Integer type;   //0- normal; 1- sticky on top;
 
     @Column(name = "status")
-    private Integer status;
+    private Integer status; //0- normal; 1- hightlight; 2- banned;
 
     @Column(name = "create_time")
     private Instant createTime;
@@ -35,7 +35,7 @@ public class DiscussPost {
     private Integer commentCount;
 
     @Column(name = "score")
-    private Double score;
+    private Double score;   // to sort the posts
 
     public Integer getId() {
         return id;
