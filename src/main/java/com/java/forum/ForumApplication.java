@@ -1,4 +1,4 @@
-package com.java.forum.forum;
+package com.java.forum;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

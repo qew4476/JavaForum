@@ -1,28 +1,25 @@
-package com.java.forum.forum.entity;
+package com.java.forum.entity;
 
 import jakarta.persistence.*;
 
 import java.time.Instant;
 
 @Entity
-@Table(name = "comment", schema = "forum_db")
-public class Comment {
+@Table(name = "message", schema = "forum_db")
+public class Message {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "from_id")
+    private Integer fromId;
 
-    @Column(name = "entity_type")
-    private Integer entityType;
+    @Column(name = "to_id")
+    private Integer toId;
 
-    @Column(name = "entity_id")
-    private Integer entityId;
-
-    @Column(name = "target_id")
-    private Integer targetId;
+    @Column(name = "conversation_id", nullable = false, length = 45)
+    private String conversationId;
 
     @Lob
     @Column(name = "content")
@@ -42,36 +39,28 @@ public class Comment {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getFromId() {
+        return fromId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setFromId(Integer fromId) {
+        this.fromId = fromId;
     }
 
-    public Integer getEntityType() {
-        return entityType;
+    public Integer getToId() {
+        return toId;
     }
 
-    public void setEntityType(Integer entityType) {
-        this.entityType = entityType;
+    public void setToId(Integer toId) {
+        this.toId = toId;
     }
 
-    public Integer getEntityId() {
-        return entityId;
+    public String getConversationId() {
+        return conversationId;
     }
 
-    public void setEntityId(Integer entityId) {
-        this.entityId = entityId;
-    }
-
-    public Integer getTargetId() {
-        return targetId;
-    }
-
-    public void setTargetId(Integer targetId) {
-        this.targetId = targetId;
+    public void setConversationId(String conversationId) {
+        this.conversationId = conversationId;
     }
 
     public String getContent() {

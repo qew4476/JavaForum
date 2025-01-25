@@ -1,5 +1,5 @@
-package com.java.forum.forum.dao;
-import com.java.forum.forum.entity.User;
+package com.java.forum.dao;
+import com.java.forum.entity.User;
 
 public interface UserDao {
 

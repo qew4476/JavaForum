@@ -1,4 +1,4 @@
-package com.java.forum.forum.entity;
+package com.java.forum.entity;
 
 import jakarta.persistence.*;
 

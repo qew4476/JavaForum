@@ -1,25 +1,28 @@
-package com.java.forum.forum.entity;
+package com.java.forum.entity;
 
 import jakarta.persistence.*;
 
 import java.time.Instant;
 
 @Entity
-@Table(name = "message", schema = "forum_db")
-public class Message {
+@Table(name = "comment", schema = "forum_db")
+public class Comment {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "from_id")
-    private Integer fromId;
+    @Column(name = "user_id")
+    private Integer userId;
 
-    @Column(name = "to_id")
-    private Integer toId;
+    @Column(name = "entity_type")
+    private Integer entityType;
 
-    @Column(name = "conversation_id", nullable = false, length = 45)
-    private String conversationId;
+    @Column(name = "entity_id")
+    private Integer entityId;
+
+    @Column(name = "target_id")
+    private Integer targetId;
 
     @Lob
     @Column(name = "content")
@@ -39,28 +42,36 @@ public class Message {
         this.id = id;
     }
 
-    public Integer getFromId() {
-        return fromId;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setFromId(Integer fromId) {
-        this.fromId = fromId;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Integer getToId() {
-        return toId;
+    public Integer getEntityType() {
+        return entityType;
     }
 
-    public void setToId(Integer toId) {
-        this.toId = toId;
+    public void setEntityType(Integer entityType) {
+        this.entityType = entityType;
     }
 
-    public String getConversationId() {
-        return conversationId;
+    public Integer getEntityId() {
+        return entityId;
     }
 
-    public void setConversationId(String conversationId) {
-        this.conversationId = conversationId;
+    public void setEntityId(Integer entityId) {
+        this.entityId = entityId;
+    }
+
+    public Integer getTargetId() {
+        return targetId;
+    }
+
+    public void setTargetId(Integer targetId) {
+        this.targetId = targetId;
     }
 
     public String getContent() {
