@@ -20,23 +20,12 @@ public class ForumApplication {
 //    private UserDaoImpl userDao;
 //    @Bean
 //    public String test() {
-//        // 使用注入的 userDao 来进行数据库操作
-//        System.out.println(userDao.selectById(101));  // 假设这里会打印数据库查询结果
+//
+//        System.out.println(userDao.selectById(101));
 //        System.out.println(userDao.selectByName("nowcoder11"));
 //        return "test";
 //    }
 
-    @Autowired
-    private DiscussPostDaoImpl discussPostDao;
-    @Bean
-    public String test(){
-        List<DiscussPost> discussPostList = discussPostDao.selectDiscussPosts(101,0,10);
-        for(DiscussPost post: discussPostList){
-            System.out.println(post);
-        }
-
-        return "test";
-    }
 
 }
 
