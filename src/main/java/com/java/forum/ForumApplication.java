@@ -1,10 +1,14 @@
 package com.java.forum;
 
+import com.java.forum.dao.DiscussPostDaoImpl;
+import com.java.forum.entity.DiscussPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import com.java.forum.dao.UserDaoImpl;
+
+import java.util.List;
+
 @SpringBootApplication
 public class ForumApplication {
 
@@ -22,6 +26,17 @@ public class ForumApplication {
 //        return "test";
 //    }
 
+    @Autowired
+    private DiscussPostDaoImpl discussPostDao;
+    @Bean
+    public String test(){
+        List<DiscussPost> discussPostList = discussPostDao.selectDiscussPosts(101,0,10);
+        for(DiscussPost post: discussPostList){
+            System.out.println(post);
+        }
+
+        return "test";
+    }
 
 }
 
