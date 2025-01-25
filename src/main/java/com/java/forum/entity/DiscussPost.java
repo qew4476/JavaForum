@@ -13,7 +13,7 @@ public class DiscussPost {
     private Integer id;
 
     @Column(name = "user_id", length = 45)
-    private String userId;
+    private Integer userId;
 
     @Column(name = "title", length = 100)
     private String title;
@@ -45,11 +45,11 @@ public class DiscussPost {
         this.id = id;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -124,4 +124,21 @@ public class DiscussPost {
                 ", score=" + score +
                 '}';
     }
+
+    public DiscussPost(){
+
+    }
+
+    public DiscussPost(Integer userId, String title, String content, Integer type, Integer status, Instant createTime, Long commentCount, Double score) {
+        this.userId = userId;
+        this.title = title;
+        this.content = content;
+        this.type = type;
+        this.status = status;
+        this.createTime = createTime;
+        this.commentCount = commentCount;
+        this.score = score;
+    }
+
+
 }
