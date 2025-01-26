@@ -1,13 +1,11 @@
 package com.java.forum;
 
-import com.java.forum.dao.DiscussPostDaoImpl;
-import com.java.forum.entity.DiscussPost;
+//import com.java.forum.util.MailClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.List;
 
 @SpringBootApplication
 public class ForumApplication {
@@ -26,7 +24,14 @@ public class ForumApplication {
 //        return "test";
 //    }
 
-
+//    @Autowired
+//    private MailClient mailClient;
+//
+//    @Bean
+//    public String test() {
+//        mailClient.sendMail("state9981@gmail.com", "Test", "Content!!!");
+//        return "test";
+//    }
 }
 
 
