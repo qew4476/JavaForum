@@ -30,6 +30,11 @@ public class HomeController {
         //Spring MVC initialize Model and Page is automatically added to the Model.
         page.setPostTotalCount(discussPostService.findTotalDiscussPostCount(0));    //HomePage: userId is 0
         page.setTabPath("/index");
+        int currentPageNum = page.getCurrentPageNum();
+        int totalPageCount = page.getTotalPageCount();
+        if (currentPageNum > totalPageCount) {
+            page.setCurrentPageNum(totalPageCount);
+        }
 
         List<DiscussPost> list = discussPostService.findDiscussPosts(0, page.getOffset(), page.getPostDisplayLimit());
         List<Map<String, Object>> discussPosts = new ArrayList<>();

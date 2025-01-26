@@ -7,7 +7,7 @@ package com.java.forum.entity;
 public class Page {
 
     //the current page number
-    private int currentPageNumber = 1;
+    private int currentPageNum = 1;
     //display limit:
     private int postDisplayLimit = 10;
     // the total number of discussPosts (to calculate the total number of pages)
@@ -15,13 +15,18 @@ public class Page {
     //the path to the specific path
     private String tabPath;
 
-    public int getCurrentPageNumber() {
-        return currentPageNumber;
+//    private int totalPageCount;
+
+    public int getCurrentPageNum() {
+        return currentPageNum;
     }
 
-    public void setCurrentPageNumber(int currentPageNumber) {
-        if (currentPageNumber >= 1) {
-            this.currentPageNumber = currentPageNumber;
+    public void setCurrentPageNum(int currentPageNum) {
+        int endPageNum = getEndPageNum();
+        if (currentPageNum == endPageNum) {
+            this.currentPageNum = endPageNum;
+        } else if (currentPageNum >= 1) {
+            this.currentPageNum = currentPageNum;
         }
     }
 
@@ -56,8 +61,8 @@ public class Page {
 
     //Get the starting post of the current tab
     public int getOffset() {
-        //(currentPageNumber-1) * postDisplayLimit
-        return (currentPageNumber - 1) * postDisplayLimit;
+        //(currentPageNum-1) * postDisplayLimit
+        return (currentPageNum - 1) * postDisplayLimit;
     }
 
     public int getTotalPageCount() {
@@ -71,14 +76,14 @@ public class Page {
 
     //the starting page number
     public int getStartPageNum() {
-        int startPageNum = currentPageNumber - 2;
+        int startPageNum = currentPageNum - 2;
         return Math.max(startPageNum, 1);
     }
 
     public int getEndPageNum() {
-        int endPageNum = currentPageNumber +2;
+        int endPageNum = currentPageNum + 2;
         int totalPageCount = getTotalPageCount();
-        return Math.min(endPageNum,totalPageCount); //Can't larger than totalPageCount
+        return Math.min(endPageNum, totalPageCount); //Can't larger than totalPageCount
 
     }
 
