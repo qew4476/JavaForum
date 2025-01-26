@@ -1,6 +1,7 @@
 package com.java.forum.controller;
 
 import com.java.forum.entity.DiscussPost;
+import com.java.forum.entity.Page;
 import com.java.forum.entity.User;
 import com.java.forum.service.DiscussPostService;
 import com.java.forum.service.UserService;
@@ -25,8 +26,12 @@ public class HomeController {
     private UserService userService;
 
     @RequestMapping(path = "/index", method = RequestMethod.GET)
-    public String getIndexPage(Model model) {
-        List<DiscussPost> list = discussPostService.findDiscussPosts(0, 0, 10);
+    public String getIndexPage(Model model, Page page) {
+        //Spring MVC initialize Model and Page is automatically added to the Model.
+        page.setPostTotalCount(discussPostService.findTotalDiscussPostCount(0));    //HomePage: userId is 0
+        page.setTabPath("/index");
+
+        List<DiscussPost> list = discussPostService.findDiscussPosts(0, page.getOffset(), page.getPostDisplayLimit());
         List<Map<String, Object>> discussPosts = new ArrayList<>();
         if (list != null) {
             for (DiscussPost post : list) {
@@ -39,7 +44,7 @@ public class HomeController {
 
             }
         }
-        model.addAttribute("discussPosts",discussPosts);
+        model.addAttribute("discussPosts", discussPosts);
 
         return "index";
     }

@@ -32,7 +32,7 @@ public class DiscussPost {
     private Instant createTime;
 
     @Column(name = "comment_count")
-    private Long commentCount;
+    private Integer commentCount;
 
     @Column(name = "score")
     private Double score;   // to sort the posts
@@ -93,11 +93,11 @@ public class DiscussPost {
         this.createTime = createTime;
     }
 
-    public Long getCommentCount() {
+    public Integer getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentCount(Long commentCount) {
+    public void setCommentCount(Integer commentCount) {
         this.commentCount = commentCount;
     }
 
@@ -129,7 +129,7 @@ public class DiscussPost {
 
     }
 
-    public DiscussPost(Integer userId, String title, String content, Integer type, Integer status, Instant createTime, Long commentCount, Double score) {
+    public DiscussPost(Integer userId, String title, String content, Integer type, Integer status, Instant createTime, Integer commentCount, Double score) {
         this.userId = userId;
         this.title = title;
         this.content = content;

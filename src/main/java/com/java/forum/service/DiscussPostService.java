@@ -13,11 +13,11 @@ public class DiscussPostService {
     @Autowired
     private DiscussPostDao discussPostDao;
 
-    public List<DiscussPost> findDiscussPosts(int userId, int offset, int limit) {
-        return discussPostDao.selectDiscussPosts(userId,offset,limit);
+    public List<DiscussPost> findDiscussPosts(int userId, int offset, int postDisplayLimit) {
+        return discussPostDao.selectDiscussPosts(userId,offset,postDisplayLimit);
     }
 
-    public long findDiscussPostRows(int userId){
-        return discussPostDao.selectDiscussPostRows(userId);
+    public int findTotalDiscussPostCount(int userId){
+        return discussPostDao.selectTotalDiscussPostCount(userId);
     }
 }
