@@ -25,7 +25,15 @@ public class LoginController {
     public String register(Model model, User user){
         Map<String, Object> map = userService.register(user);
         if (map == null || map.isEmpty()){
-
+            model.addAttribute("msg", "Registered successfully. Please check your mail box to verify the email.");
+            model.addAttribute("target", "/index");
+            return "/site/operate-result";
+        }else{
+            model.addAttribute("usernameMsg", map.get("usernameMsg"));
+            model.addAttribute("passwordMsg", map.get("passwordMsg"));
+            model.addAttribute("emailMsg", map.get("emailMsg"));
+            return "site/register";
         }
+
     }
 }

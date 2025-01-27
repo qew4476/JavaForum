@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -37,46 +38,47 @@ public class UserService {
     public User findUserById(int id) {
         return userDao.selectById(id);
     }
-    public Map<String, Object> register(User user){
+
+    public Map<String, Object> register(User user) {
         Map<String, Object> map = new HashMap<>();
 
-        if (user == null){
+        if (user == null) {
             throw new IllegalArgumentException("Parameter cannot be empty!");
         }
 
-        if (StringUtils.isBlank(user.getUsername())){
+        if (StringUtils.isBlank(user.getUsername())) {
             map.put("usernameMsg", "The username cannot be empty!");
             return map;
         }
 
-        if (StringUtils.isBlank(user.getPassword())){
+        if (StringUtils.isBlank(user.getPassword())) {
             map.put("passwordMsg", "The password cannot be empty!");
             return map;
         }
 
-        if (StringUtils.isBlank(user.getEmail())){
+        if (StringUtils.isBlank(user.getEmail())) {
             map.put("emailMsg", "The email cannot be empty!");
             return map;
         }
 
-        // Verify whether the username is already registered.
-        User existUser = userDao.selectByName(user.getUsername());
-        if (existUser != null){
+// Verify whether the username is already registered
+        Optional<User> existUser = Optional.ofNullable(userDao.selectByName(user.getUsername()));
+        if (existUser.isPresent()) {
             map.put("usernameMsg", "The username is already registered.");
             return map;
         }
 
-        // Verify whether the email is already registered
-        existUser = userDao.selectByEmail(user.getEmail());
-        if (existUser !=null){
+// Verify whether the email is already registered
+        existUser = Optional.ofNullable(userDao.selectByEmail(user.getEmail()));
+        if (existUser.isPresent()) {
             map.put("emailMsg", "The email is already registered.");
         }
 
+
         //Registered
         //Encryption
-
-        user.setSalt(ForumUtil.generateUUID().substring(0,5));
-        user.setPassword(ForumUtil.md5(user.getPassword()+ user.getSalt()));
+        user.setSalt(ForumUtil.generateUUID().substring(0, 5));
+        user.setPassword(ForumUtil.md5(user.getPassword() + user.getSalt()));
         user.setType(0);
         user.setStatus(0);
         user.setActivationCode(ForumUtil.generateUUID());
@@ -87,14 +89,15 @@ public class UserService {
         // send activation email
         Context context = new Context();
         context.setVariable("email", user.getEmail());
-        String url = domain + contextPath + "/activation/" +user.getId() +user.getActivationCode();
-        context.setVariable("url",url);
+        String url = domain + contextPath + "/activation/" + user.getId() + user.getActivationCode();
+        context.setVariable("url", url);
         //http://localhost:8080/javaforum/activation/{user_id}/activationCode
-        String content = templateEngine.process("/mail/activation",context);
+        String content = templateEngine.process("/mail/activation", context);
         mailClient.sendMail(user.getEmail(), "Verify Your Email", content);
 
         return map;
     }
+
 
 
 

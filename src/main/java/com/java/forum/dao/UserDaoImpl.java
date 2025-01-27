@@ -2,6 +2,7 @@ package com.java.forum.dao;
 
 import com.java.forum.entity.User;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
@@ -19,16 +20,24 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User selectByName(String username) {
-        return entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+        try{        return entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
                 .setParameter("username", username)
                 .getSingleResult();
+        }catch (NoResultException e){
+            return null;
+
+        }
     }
 
     @Override
     public User selectByEmail(String email) {
+        try{
         return entityManager.createQuery("SELECT u FROM User u WHERE u.email=:email", User.class)
                 .setParameter("email", email)
                 .getSingleResult();
+        }catch (NoResultException e){
+            return null;
+        }
     }
 
     @Override
