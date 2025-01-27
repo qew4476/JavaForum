@@ -2,6 +2,7 @@ package com.java.forum.service;
 
 import com.java.forum.dao.UserDao;
 import com.java.forum.entity.User;
+import com.java.forum.util.ForumConstant;
 import com.java.forum.util.ForumUtil;
 import com.java.forum.util.MailClient;
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements ForumConstant {
 
     @Autowired
     UserDao userDao;
@@ -85,11 +86,10 @@ public class UserService {
         user.setHeaderUrl("https://ik.imagekit.io/javaforum/default_head_sticker.png?updatedAt=1737969599494");
         user.setCreateTime(Instant.now());
         userDao.insertUser(user);
-
         // send activation email
         Context context = new Context();
         context.setVariable("email", user.getEmail());
-        String url = domain + contextPath + "/activation/" + user.getId() + user.getActivationCode();
+        String url = domain + contextPath + "activation/" + user.getId() + "/" + user.getActivationCode();
         context.setVariable("url", url);
         //http://localhost:8080/javaforum/activation/{user_id}/activationCode
         String content = templateEngine.process("/mail/activation", context);
@@ -98,7 +98,17 @@ public class UserService {
         return map;
     }
 
-
+    public int activation(int userId, String code) {
+        User user = userDao.selectById(userId);
+        if (user.getStatus() == 1) {
+            return ACTIVATION_REPEAT;
+        } else if (user.getActivationCode().equals(code)) {
+            userDao.updateStatus(userId, 1);
+            return ACTIVATION_SUCCESS;
+        } else {
+            return ACTIVATION_FAILURE;
+        }
+    }
 
 
 }
