@@ -8,13 +8,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "user", schema = "forum_db")
-public class User{
+public class User {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "username", length = 50)
+    @Column(name = "username", length = 50, unique = true)
     private String username;
 
     @Column(name = "password", length = 50)
@@ -23,7 +23,7 @@ public class User{
     @Column(name = "salt", length = 50)
     private String salt;
 
-    @Column(name = "email", length = 100)
+    @Column(name = "email", length = 100, unique = true)
     private String email;
 
     @Column(name = "type")
@@ -41,7 +41,7 @@ public class User{
     @Column(name = "create_time")
     private Instant createTime;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<DiscussPost> discussPosts;
 
     public User() {

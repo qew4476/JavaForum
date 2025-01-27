@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="https://ik.imagekit.io/javaforum/forum_logo.png?updatedAt=1737971335586"/>
+    <title>JavaForum - Verify Your Email Address</title>
+</head>
+<body>
+	<div>
+		<p>
+			<b th:text="${email}">xxx@xxx.com</b>, Hello!
+		</p>
+		<p>
+			Thank you for signing up with Java Forum! To complete your registration, please verify your email address.
+			Click the link below to verify your email: <br>
+			<a th:href="${url}">Click this Link</a>
+
+		</p>
+	</div>
+</body>
+</html>
