@@ -15,16 +15,6 @@ public class ForumApplication {
     }
 
 //    @Autowired
-//    private UserDaoImpl userDao;
-//    @Bean
-//    public String test() {
-//
-//        System.out.println(userDao.selectById(101));
-//        System.out.println(userDao.selectByName("nowcoder11"));
-//        return "test";
-//    }
-
-//    @Autowired
 //    private MailClient mailClient;
 //
 //    @Bean

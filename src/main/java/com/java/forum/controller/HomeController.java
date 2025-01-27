@@ -42,7 +42,7 @@ public class HomeController {
             for (DiscussPost post : list) {
                 Map<String, Object> map = new HashMap<>();  //to tage ("user", user), ("post", post) and put them together
                 map.put("post", post);
-                User user = userService.findUserById(post.getUserId());
+                User user = post.getUser();
                 map.put("user", user);
                 discussPosts.add(map);
 

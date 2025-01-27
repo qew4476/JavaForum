@@ -12,21 +12,22 @@ public class DiscussPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_id", length = 45)
-    private Integer userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "title", length = 100)
     private String title;
 
     @Lob
-    @Column(name = "content")
+    @Column(name = "content", columnDefinition = "text")
     private String content;
 
     @Column(name = "type")
     private Integer type;   //0- normal; 1- sticky on top;
 
     @Column(name = "status")
-    private Integer status; //0- normal; 1- hightlight; 2- banned;
+    private Integer status; //0- normal; 1- highlight; 2- banned;
 
     @Column(name = "create_time")
     private Instant createTime;
@@ -37,6 +38,20 @@ public class DiscussPost {
     @Column(name = "score")
     private Double score;   // to sort the posts
 
+    public DiscussPost() {
+    }
+
+    public DiscussPost(User user, String title, String content, Integer type, Integer status, Instant createTime, Integer commentCount, Double score) {
+        this.user = user;
+        this.title = title;
+        this.content = content;
+        this.type = type;
+        this.status = status;
+        this.createTime = createTime;
+        this.commentCount = commentCount;
+        this.score = score;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -45,12 +60,12 @@ public class DiscussPost {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTitle() {
@@ -108,37 +123,4 @@ public class DiscussPost {
     public void setScore(Double score) {
         this.score = score;
     }
-
-
-    @Override
-    public String toString() {
-        return "DiscussPost{" +
-                "id=" + id +
-                ", userId='" + userId + '\'' +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", type=" + type +
-                ", status=" + status +
-                ", createTime=" + createTime +
-                ", commentCount=" + commentCount +
-                ", score=" + score +
-                '}';
-    }
-
-    public DiscussPost(){
-
-    }
-
-    public DiscussPost(Integer userId, String title, String content, Integer type, Integer status, Instant createTime, Integer commentCount, Double score) {
-        this.userId = userId;
-        this.title = title;
-        this.content = content;
-        this.type = type;
-        this.status = status;
-        this.createTime = createTime;
-        this.commentCount = commentCount;
-        this.score = score;
-    }
-
-
 }

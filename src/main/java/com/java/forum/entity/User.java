@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.time.Instant;
 
+import java.util.List;
+
 @Entity
 @Table(name = "user", schema = "forum_db")
 public class User{
@@ -39,25 +41,13 @@ public class User{
     @Column(name = "create_time")
     private Instant createTime;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
-                ", email='" + email + '\'' +
-                ", type=" + type +
-                ", status=" + status +
-                ", activationCode='" + activationCode + '\'' +
-                ", headerUrl='" + headerUrl + '\'' +
-                ", createTime=" + createTime +
-                '}';
-    }
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<DiscussPost> discussPosts;
 
     public User() {
     }
-    public User(String username, String password, String salt, String email, Integer type, Integer status, String activationCode, String headerUrl, Instant createTime) {
+
+    public User(String username, String password, String salt, String email, Integer type, Integer status, String activationCode, String headerUrl, Instant createTime, List<DiscussPost> discussPosts) {
         this.username = username;
         this.password = password;
         this.salt = salt;
@@ -67,6 +57,7 @@ public class User{
         this.activationCode = activationCode;
         this.headerUrl = headerUrl;
         this.createTime = createTime;
+        this.discussPosts = discussPosts;
     }
 
     public Integer getId() {
@@ -149,4 +140,28 @@ public class User{
         this.createTime = createTime;
     }
 
+    public List<DiscussPost> getDiscussPosts() {
+        return discussPosts;
+    }
+
+    public void setDiscussPosts(List<DiscussPost> discussPosts) {
+        this.discussPosts = discussPosts;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
+                ", email='" + email + '\'' +
+                ", type=" + type +
+                ", status=" + status +
+                ", activationCode='" + activationCode + '\'' +
+                ", headerUrl='" + headerUrl + '\'' +
+                ", createTime=" + createTime +
+                ", discussPosts=" + discussPosts +
+                '}';
+    }
 }
