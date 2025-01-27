@@ -12,57 +12,7 @@
 <body>
 <div class="nk-container">
     <!-- Top -->
-    <header class="bg-dark sticky-top">
-        <div class="container">
-            <!-- navigation -->
-            <nav class="navbar navbar-expand-lg navbar-dark">
-                <!-- logo -->
-                <a class="navbar-brand" href="#"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <!-- Features -->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item ml-3 btn-group-vertical">
-                            <a class="nav-link" href="index.html">Home Page</a>
-                        </li>
-                        <li class="nav-item ml-3 btn-group-vertical">
-                            <a class="nav-link position-relative" href="site/letter.html">Message<span
-                                    class="badge badge-danger">12</span></a>
-                        </li>
-                        <li class="nav-item ml-3 btn-group-vertical">
-                            <a class="nav-link" href="site/register.html">Register</a>
-                        </li>
-                        <li class="nav-item ml-3 btn-group-vertical">
-                            <a class="nav-link" href="site/login.html">Log in</a>
-                        </li>
-                        <li class="nav-item ml-3 btn-group-vertical dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="http://images.nowcoder.com/head/1t.png" class="rounded-circle"
-                                     style="width:30px;"/>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-center" href="site/profile.html">Personal homepage</a>
-                                <a class="dropdown-item text-center" href="site/setting.html">Account settings</a>
-                                <a class="dropdown-item text-center" href="site/login.html">Log out</a>
-                                <div class="dropdown-divider"></div>
-                                <span class="dropdown-item text-center text-secondary">Java Forum</span>
-                            </div>
-                        </li>
-                    </ul>
-                    <!-- Search -->
-                    <form class="form-inline my-2 my-lg-0" action="site/search.html">
-                        <input class="form-control mr-sm-2" type="search" aria-label="Search"/>
-                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <header th:replace="~{layout::header}"></header>
 
     <!-- Content -->
     <div class="main">
@@ -78,7 +28,7 @@
                     </li>
                 </ul>
                 <button type="button" class="btn btn-primary btn-sm position-absolute rt-0" data-toggle="modal"
-                        data-target="#publishModal">我要发布
+                        data-target="#publishModal">Post
                 </button>
             </div>
             <!-- Pop-up box -->
@@ -180,61 +130,8 @@
     </div>
 
     <!-- Bottom -->
-    <footer class="bg-dark">
-        <div class="container">
-            <div class="row">
-                <!-- Qrcode -->
-                <div class="col-4 qrcode">
-                    <img src="#" class="img-thumbnail"
-                         style="width:136px;"/>
-                </div>
-                <!-- Company information -->
-                <div class="col-8 detail-info">
-                    <div class="row">
-                        <div class="col">
-                            <ul class="nav">
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="#">About Us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="#">Join us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="#">Feedback</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="#">Service</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="#">Contact us</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="#">Disclaimer</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="#">links</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <ul class="nav btn-group-vertical company-info">
-                                <li class="nav-item text-white-50">
-                                    Company address: Taipei
-                                </li>
-                                <li class="nav-item text-white-50">
-                                    Contact information:：04-26777777&nbsp;&nbsp;&nbsp;&nbsp;xxx-xxxxx@gmail
-                                </li>
+    <div th:replace="~{layout :: footer}"></div>
 
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
