@@ -1,4 +1,4 @@
-var CONTEXT_PATH = "/forum"
+const CONTEXT_PATH = "/javaforum"
 
 window.alert = function(message) {
 	if(!$(".alert-box").length) {
