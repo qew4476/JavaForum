@@ -1,5 +1,6 @@
 package com.java.forum.service;
 
+import com.java.forum.dao.LoginTicketDao;
 import com.java.forum.dao.UserDao;
 import com.java.forum.entity.User;
 import com.java.forum.util.ForumConstant;
@@ -22,7 +23,10 @@ import java.util.Optional;
 public class UserService implements ForumConstant {
 
     @Autowired
-    UserDao userDao;
+    private LoginTicketDao loginTicketDao;
+
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
     private MailClient mailClient;
