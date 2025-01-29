@@ -135,6 +135,10 @@ public class UserService implements ForumConstant {
 
         LoginTicket loginTicket = new LoginTicket();
         loginTicket.setUser(user);
+        String ticket;
+        do {
+            ticket = ForumUtil.generateUUID();
+        } while (loginTicketDao.selectByTicket(ticket) !=null);
         loginTicket.setTicket(ForumUtil.generateUUID());
         loginTicket.setStatus(0);   // 0: valid; 1: invalid
         loginTicket.setExpired(Instant.now().plusSeconds(expiredSeconds));
