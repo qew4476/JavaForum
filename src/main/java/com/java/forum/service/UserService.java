@@ -154,5 +154,8 @@ public class UserService implements ForumConstant {
         loginTicketDao.updateStatus(ticket,1);
     }
 
+    public LoginTicket findLoginTicket(String ticket){
+        return loginTicketDao.selectByTicket(ticket);
+    }
 
 }

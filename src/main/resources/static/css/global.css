@@ -21,7 +21,7 @@ body {
 }
 
 header .navbar-brand {
-	background: url('/img/forum_header.png') no-repeat;
+	background: url('../img/forum_header.png') no-repeat;
 	background-size: 147px 42px;
 	width: 147px;
 	height: 42px;
