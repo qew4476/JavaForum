@@ -2,6 +2,7 @@ package com.java.forum.service;
 
 import com.java.forum.dao.LoginTicketDao;
 import com.java.forum.dao.UserDao;
+import com.java.forum.entity.LoginTicket;
 import com.java.forum.entity.User;
 import com.java.forum.util.ForumConstant;
 import com.java.forum.util.ForumUtil;
@@ -112,6 +113,41 @@ public class UserService implements ForumConstant {
         } else {
             return ACTIVATION_FAILURE;
         }
+    }
+
+    public Map<String, Object> login(String username, String password, int expiredSeconds) {
+        Map<String, Object> map = new HashMap<>();
+
+        if (StringUtils.isBlank(username)) {
+            map.put("usernameMsg", "The username cannot be empty!");
+        }
+
+        if (StringUtils.isBlank(password)) {
+            map.put("passwordMsg", "The password cannot be empty!");
+            return map;
+        }
+
+        User user = userDao.selectByName(username);
+        if (user == null) {
+            map.put("usernameMsg", "The username does not exist!");
+            return map;
+        }
+
+        LoginTicket loginTicket = new LoginTicket();
+        loginTicket.setUser(user);
+        loginTicket.setTicket(ForumUtil.generateUUID());
+        loginTicket.setStatus(0);   // 0: valid; 1: invalid
+        loginTicket.setExpired(Instant.now().plusSeconds(expiredSeconds));
+        loginTicketDao.insertLoginTicket(loginTicket);
+        map.put("ticket", loginTicket.getTicket());
+
+
+        return map;
+
+    }
+
+    public void logout(String ticket){
+        loginTicketDao.updateStatus(ticket,1);
     }
 
 

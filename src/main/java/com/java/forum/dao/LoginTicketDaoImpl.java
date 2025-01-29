@@ -4,6 +4,7 @@ import com.java.forum.entity.LoginTicket;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -13,6 +14,7 @@ public class LoginTicketDaoImpl implements LoginTicketDao {
     EntityManager entityManager;
 
     @Override
+    @Transactional
     public int insertLoginTicket(LoginTicket loginTicket) {
         entityManager.persist(loginTicket);
         return loginTicket.getId();
@@ -30,6 +32,7 @@ public class LoginTicketDaoImpl implements LoginTicketDao {
     }
 
     @Override
+    @Transactional
     public int updateStatus(String ticket, int status) {
         return entityManager.createQuery("UPDATE LoginTicket t SET t.status = :status WHERE t.ticket=:ticket")
                 .setParameter("status", status)

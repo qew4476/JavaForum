@@ -19,13 +19,15 @@
     <div class="main">
         <div class="container pl-5 pr-5 pt-3 pb-3 mt-3 mb-3">
             <h3 class="text-center text-info border-bottom pb-3">Login</h3>
-            <form class="mt-5">
+            <form class="mt-5" method="post" th:action="@{/login}">
                 <div class="form-group row">
                     <label for="username" class="col-sm-2 col-form-label text-right">Username:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control is-invalid" id="username" placeholder="Please input your username"
+                        <input type="text" th:class="|form-control ${usernameMsg!=null?'is-invalid':''}| "
+                               th:value="${param.username}"
+                               id="username" name="username" placeholder="Please input your username"
                                required>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" th:text="${usernameMsg}">
                             This username doesn't exist!
                         </div>
                     </div>
@@ -33,9 +35,11 @@
                 <div class="form-group row mt-4">
                     <label for="password" class="col-sm-2 col-form-label text-right">Password:</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control is-invalid" id="password"
+                        <input type="password" th:class="|form-control ${usernameMsg!=null?'is-invalid':''}|"
+                               id="password" name="password"
+                               th:value="${param.password}"
                                placeholder="Please input your password" required>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" th:text="${passwordMsg}">
                             The length of password cannot be shorter than 8 bytes.
                         </div>
                     </div>
@@ -43,9 +47,10 @@
                 <div class="form-group row mt-4">
                     <label for="verifycode" class="col-sm-2 col-form-label text-right">verifycode:</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control is-invalid" id="verifycode" placeholder="Please input verifycode!">
-                        <div class="invalid-feedback">
-                            Verifycode Error!
+                        <input type="text" th:class="|form-control ${codeMsg!=null?'is-invalid':''}|"
+                               id="verifycode" name="code" placeholder="Please input captcha!">
+                        <div class="invalid-feedback" th:text="${codeMsg}">
+                            Captcha error!
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -56,7 +61,8 @@
                 <div class="form-group row mt-4">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-10">
-                        <input type="checkbox" id="remember-me" checked="checked">
+                        <input type="checkbox" id="remember-me" name="rememberMe"
+                               th:checked="${param.rememberMe}">
                         <label class="form-check-label" for="remember-me">Remember me</label>
                         <a href="forget.html" class="text-danger float-right">Forgot password?</a>
                     </div>
