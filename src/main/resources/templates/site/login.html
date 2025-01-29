@@ -35,7 +35,7 @@
                 <div class="form-group row mt-4">
                     <label for="password" class="col-sm-2 col-form-label text-right">Password:</label>
                     <div class="col-sm-10">
-                        <input type="password" th:class="|form-control ${usernameMsg!=null?'is-invalid':''}|"
+                        <input type="password" th:class="|form-control ${passwordMsg!=null?'is-invalid':''}|"
                                id="password" name="password"
                                th:value="${param.password}"
                                placeholder="Please input your password" required>

@@ -133,6 +133,17 @@ public class UserService implements ForumConstant {
             return map;
         }
 
+        if (user.getStatus() == 0) {
+            map.put("usernameMsg", "The account is not activated!(Please check your email box)");
+            return map;
+        }
+
+        password = ForumUtil.md5(password + user.getSalt());
+        if (!user.getPassword().equals(password)) {
+            map.put("passwordMsg", "The password is incorrect!");
+            return map;
+        }
+
         LoginTicket loginTicket = new LoginTicket();
         loginTicket.setUser(user);
         String ticket;
