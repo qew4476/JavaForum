@@ -87,7 +87,7 @@ public class UserController {
         String suffix = fileName.substring(fileName.lastIndexOf("."));
         response.setContentType("image/" + suffix);
         try (
-                FileInputStream fileInputStream = new FileInputStream(fileName);
+                FileInputStream fileInputStream = new FileInputStream(file);
                 OutputStream os = response.getOutputStream();   //write the image to the front-end page through the response
         ) {
             byte[] buffer = new byte[1024];
