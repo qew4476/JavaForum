@@ -138,7 +138,7 @@ public class UserService implements ForumConstant {
         String ticket;
         do {
             ticket = ForumUtil.generateUUID();
-        } while (loginTicketDao.selectByTicket(ticket) !=null);
+        } while (loginTicketDao.selectByTicket(ticket) != null);
         loginTicket.setTicket(ForumUtil.generateUUID());
         loginTicket.setStatus(0);   // 0: valid; 1: invalid
         loginTicket.setExpired(Instant.now().plusSeconds(expiredSeconds));
@@ -150,12 +150,16 @@ public class UserService implements ForumConstant {
 
     }
 
-    public void logout(String ticket){
-        loginTicketDao.updateStatus(ticket,1);
+    public void logout(String ticket) {
+        loginTicketDao.updateStatus(ticket, 1);
     }
 
-    public LoginTicket findLoginTicket(String ticket){
+    public LoginTicket findLoginTicket(String ticket) {
         return loginTicketDao.selectByTicket(ticket);
+    }
+
+    public int updateHeader(int userId, String headerUrl){
+        return userDao.updateHeader(userId, headerUrl);
     }
 
 }

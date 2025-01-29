@@ -60,12 +60,19 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int updateHeader(int id, String headerUrl) {
-        return 0;
+    @Transactional
+    public int updateHeader(int userId, String headerUrl) {
+        return entityManager.createQuery("UPDATE User u SET u.headerUrl=:headerUrl WHERE u.id=:id")
+                .setParameter("headerUrl", headerUrl)
+                .setParameter("id", userId)
+                .executeUpdate();
     }
 
     @Override
     public int updatePassword(int id, String password) {
-        return 0;
+        return entityManager.createQuery("UPDATE User u SET u.password=:password WHERE u.id=:id")
+                .setParameter("password",password)
+                .setParameter("id",id)
+                .executeUpdate();
     }
 }
