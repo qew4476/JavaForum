@@ -24,19 +24,19 @@ public class DiscussPost {
     private String content;
 
     @Column(name = "type")
-    private Integer type;   //0- normal; 1- sticky on top;
+    private Integer type = 0;   //0- normal; 1- sticky on top;
 
     @Column(name = "status")
-    private Integer status; //0- normal; 1- highlight; 2- banned;
+    private Integer status = 0; //0- normal; 1- highlight; 2- banned;
 
     @Column(name = "create_time")
     private Instant createTime;
 
     @Column(name = "comment_count")
-    private Integer commentCount;
+    private Integer commentCount = 0;
 
     @Column(name = "score")
-    private Double score;   // to sort the posts
+    private Double score = 0.0;   // to sort the posts
 
     public DiscussPost() {
     }
