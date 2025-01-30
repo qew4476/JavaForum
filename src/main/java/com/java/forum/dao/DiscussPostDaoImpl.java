@@ -8,6 +8,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Type;
@@ -71,6 +72,7 @@ public class DiscussPostDaoImpl implements DiscussPostDao {
     }
 
     @Override
+    @Transactional
     public int insertDiscussPost(DiscussPost discussPost) {
         entityManager.persist(discussPost);
         return discussPost.getId();
