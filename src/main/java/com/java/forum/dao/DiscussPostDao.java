@@ -14,4 +14,6 @@ public interface DiscussPostDao {
 
     int selectTotalDiscussPostCount(int userId);
 
+    int insertDiscussPost(DiscussPost discussPost);
+
 }

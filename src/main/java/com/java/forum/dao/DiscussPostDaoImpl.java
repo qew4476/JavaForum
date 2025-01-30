@@ -69,4 +69,10 @@ public class DiscussPostDaoImpl implements DiscussPostDao {
         return Math.toIntExact(result);
 
     }
+
+    @Override
+    public int insertDiscussPost(DiscussPost discussPost) {
+        entityManager.persist(discussPost);
+        return discussPost.getId();
+    }
 }
