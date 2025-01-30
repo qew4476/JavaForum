@@ -1,5 +1,6 @@
 package com.java.forum.controller;
 
+import com.java.forum.annotation.LoginRequired;
 import com.java.forum.service.UserService;
 import com.java.forum.util.ForumUtil;
 import com.java.forum.util.HostHolder;
@@ -42,11 +43,13 @@ public class UserController {
     @Autowired
     private HostHolder hostHolder;  //get the current user
 
+    @LoginRequired
     @RequestMapping(path = "/setting", method = RequestMethod.GET)
     public String getSettingPage() {
         return "/site/setting";
     }
 
+    @LoginRequired
     @RequestMapping(path = "/upload", method = RequestMethod.POST)
     public String uploadHeader(MultipartFile headerImage, Model model) {
         if (headerImage == null) {
