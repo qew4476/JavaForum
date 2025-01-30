@@ -4,6 +4,7 @@ import com.java.forum.dao.DiscussPostDao;
 import com.java.forum.entity.DiscussPost;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.List;
 
@@ -20,4 +21,16 @@ public class DiscussPostService {
     public int findTotalDiscussPostCount(int userId){
         return discussPostDao.selectTotalDiscussPostCount(userId);
     }
+
+    public int addDiscussPost(DiscussPost discussPost){
+        if (discussPost == null){
+            throw new IllegalArgumentException("Parameter cannot be empty!");
+        }
+        //Escape HTML tags
+        discussPost.setTitle(HtmlUtils.htmlEscape(discussPost.getTitle()));
+        discussPost.setContent(HtmlUtils.htmlEscape(discussPost.getContent()));
+
+        return discussPostDao.insertDiscussPost(discussPost);
+    }
+
 }
