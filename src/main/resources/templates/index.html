@@ -86,9 +86,9 @@
                     </a>
                     <div class="media-body">
                         <h6 class="mt-0 mb-3">
-                            <a href="#" th:utext="${map.post.title}">Post Title</a>
+                            <a th:href="@{|discuss/detail/${map.post.id}|}" th:utext="${map.post.title}">Post Title</a>
                             <span class="badge badge-secondary bg-primary"
-                                  th:if="${map.post.type==1}">Sticky On Top </span>
+                                  th:if="${map.post.type==1}">Pin</span>
                             <span class="badge badge-secondary bg-danger"
                                   th:if="${map.post.status==1}">Highlights</span>
                         </h6>
@@ -96,9 +96,9 @@
                             <b th:text="${#dates.format(map.post.createTime, 'MM-dd-yyyy HH:mm:ss')}">07-04-2024
                                 15:32:18</b>
                             <ul class="d-inline float-right">
-                                <li class="d-inline ml-2">15 Likes</li>
+                                <li class="d-inline ml-2">15 likes</li>
                                 <li class="d-inline ml-2">|</li>
-                                <li class="d-inline ml-2">6 Replys</li>
+                                <li class="d-inline ml-2">6 replies</li>
                             </ul>
                         </div>
                     </div>

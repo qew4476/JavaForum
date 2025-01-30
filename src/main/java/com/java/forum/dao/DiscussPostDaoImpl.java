@@ -77,4 +77,9 @@ public class DiscussPostDaoImpl implements DiscussPostDao {
         entityManager.persist(discussPost);
         return discussPost.getId();
     }
+
+    @Override
+    public DiscussPost selectDiscussPostById(int id) {
+        return entityManager.find(DiscussPost.class, id);
+    }
 }

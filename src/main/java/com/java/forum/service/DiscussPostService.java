@@ -33,4 +33,8 @@ public class DiscussPostService {
         return discussPostDao.insertDiscussPost(discussPost);
     }
 
+    public DiscussPost findDiscussPostById(int id){
+        return discussPostDao.selectDiscussPostById(id);
+    }
+
 }
