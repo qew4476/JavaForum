@@ -90,15 +90,15 @@
                             <span class="badge badge-secondary bg-primary"
                                   th:if="${map.post.type==1}">Pin</span>
                             <span class="badge badge-secondary bg-danger"
-                                  th:if="${map.post.status==1}">Highlights</span>
+                                  th:if="${map.post.status==1}">Highlight</span>
                         </h6>
                         <div class="text-muted font-size-12">
                             <b th:text="${#dates.format(map.post.createTime, 'MM-dd-yyyy HH:mm:ss')}">07-04-2024
                                 15:32:18</b>
                             <ul class="d-inline float-right">
-                                <li class="d-inline ml-2">15 likes</li>
+                                <li class="d-inline ml-2">Like(5)</li>
                                 <li class="d-inline ml-2">|</li>
-                                <li class="d-inline ml-2">6 replies</li>
+                                <li class="d-inline ml-2">Reply(<i th:text="${map.post.commentCount}"></i>)</li>
                             </ul>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
 
             </ul>
             <!-- Tab Page -->
-            <nav class="mt-5" th:if="${page.postTotalCount>0}">
+            <nav class="mt-5" th:if="${page.postTotalCount>0}" th:fragment="pagination">
                 <ul class="pagination justify-content-center">
                     <li class="page-item">
                         <a class="page-link" th:href="@{${page.tabPath}(currentPageNum=1)}">Home</a>

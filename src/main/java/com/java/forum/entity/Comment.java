@@ -12,17 +12,18 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "entity_type")
-    private Integer entityType;
+    private Integer entityType; // 1: post, 2: comment
 
     @Column(name = "entity_id")
-    private Integer entityId;
+    private Integer entityId;   // post id(if entityType=1) or comment id(if entityType=2)
 
     @Column(name = "target_id")
-    private Integer targetId;
+    private Integer target_id=0;
 
     @Lob
     @Column(name = "content")
@@ -34,20 +35,20 @@ public class Comment {
     @Column(name = "create_time")
     private Instant createTime;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public Integer getEntityType() {
@@ -66,12 +67,12 @@ public class Comment {
         this.entityId = entityId;
     }
 
-    public Integer getTargetId() {
-        return targetId;
+    public Integer getTarget_id() {
+        return target_id;
     }
 
-    public void setTargetId(Integer targetId) {
-        this.targetId = targetId;
+    public void setTarget_id(Integer target_id) {
+        this.target_id = target_id;
     }
 
     public String getContent() {
@@ -98,4 +99,29 @@ public class Comment {
         this.createTime = createTime;
     }
 
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", user=" + user +
+                ", entityType=" + entityType +
+                ", entityId=" + entityId +
+                ", target_id=" + target_id +
+                ", content='" + content + '\'' +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                '}';
+    }
+    public Comment() {
+    }
+
+    public Comment(User user, Integer entityType, Integer entityId, Integer target_id, String content, Integer status, Instant createTime) {
+        this.user = user;
+        this.entityType = entityType;
+        this.entityId = entityId;
+        this.target_id = target_id;
+        this.content = content;
+        this.status = status;
+        this.createTime = createTime;
+    }
 }
