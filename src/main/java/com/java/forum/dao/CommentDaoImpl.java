@@ -30,4 +30,12 @@ public class CommentDaoImpl implements CommentDao {
                 .setParameter("entityId", entityId)
                 .getSingleResult().intValue();
     }
+
+    @Override
+    public int insertComment(Comment comment) {
+        entityManager.persist(comment);
+        return comment.getId();
+    }
+
+
 }

@@ -82,4 +82,14 @@ public class DiscussPostDaoImpl implements DiscussPostDao {
     public DiscussPost selectDiscussPostById(int id) {
         return entityManager.find(DiscussPost.class, id);
     }
+
+    @Override
+    public int updateCommentCount(int id, int commentCount) {
+        return entityManager.createQuery("UPDATE DiscussPost SET commentCount = :commentCount WHERE id = :id")
+                .setParameter("commentCount", commentCount)
+                .setParameter("id", id)
+                .executeUpdate();
+
+
+    }
 }
