@@ -30,7 +30,10 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
+
         <!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-docker-compose -->
+
         <dependency>
             <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
