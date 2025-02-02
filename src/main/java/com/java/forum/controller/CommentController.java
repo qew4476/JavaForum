@@ -1,5 +1,6 @@
 package com.java.forum.controller;
 
+import com.java.forum.annotation.LoginRequired;
 import com.java.forum.entity.Comment;
 import com.java.forum.service.CommentService;
 import com.java.forum.util.HostHolder;
@@ -21,6 +22,7 @@ public class CommentController
     @Autowired
     private HostHolder hostHolder;
 
+    @LoginRequired
     @RequestMapping(path = "/add/{discussPostId}", method = RequestMethod.POST)
     public String addComment(@PathVariable("discussPostId") int discussPostId, Comment comment)
     {
