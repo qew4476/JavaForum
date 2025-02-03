@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "discuss_post", schema = "forum_db")
+@Table(name = "discuss_post")
 public class DiscussPost {
     @Id
     @Column(name = "id", nullable = false)
@@ -19,8 +19,8 @@ public class DiscussPost {
     @Column(name = "title", length = 100)
     private String title;
 
-    @Lob
-    @Column(name = "content", columnDefinition = "text")
+
+    @Column(name = "content",columnDefinition = "text")
     private String content;
 
     @Column(name = "type")

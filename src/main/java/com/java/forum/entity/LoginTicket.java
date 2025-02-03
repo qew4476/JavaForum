@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "login_ticket", schema = "forum_db")
+@Table(name = "login_ticket")
 public class LoginTicket {
     @Id
     @Column(name = "id", nullable = false)

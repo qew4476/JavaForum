@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "comment", schema = "forum_db")
+@Table(name = "comment")
 public class Comment {
     @Id
     @Column(name = "id", nullable = false)
@@ -25,8 +25,8 @@ public class Comment {
     @Column(name = "target_id")
     private Integer target_id=0;
 
-    @Lob
-    @Column(name = "content")
+
+    @Column(name = "content", columnDefinition = "text")
     private String content;
 
     @Column(name = "status")

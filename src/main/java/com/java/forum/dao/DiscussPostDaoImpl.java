@@ -29,7 +29,7 @@ public class DiscussPostDaoImpl implements DiscussPostDao {
 
         Predicate statusPredicate = criteriaBuilder.notEqual(root.get("status"), 2);
         if (userId != 0) {
-            Predicate userPredicate = criteriaBuilder.equal(root.get("userId"), userId);
+            Predicate userPredicate = criteriaBuilder.equal(root.get("user").get("id"), userId);
             criteriaQuery.where(criteriaBuilder.and(statusPredicate, userPredicate));
         } else {
             criteriaQuery.where(statusPredicate);
@@ -58,7 +58,7 @@ public class DiscussPostDaoImpl implements DiscussPostDao {
 
         Predicate statusPredicate = criteriaBuilder.notEqual(root.get("status"), 2);
         if (userId != 0) {
-            Predicate userPredicate = criteriaBuilder.equal(root.get("userId"), userId);
+            Predicate userPredicate = criteriaBuilder.equal(root.get("user").get("id"), userId);
             criteriaQuery.where(criteriaBuilder.and(statusPredicate, userPredicate));
         } else {
             criteriaQuery.where(statusPredicate);

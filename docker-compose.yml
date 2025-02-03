@@ -1,42 +1,28 @@
-version: '3.8'
 services:
-  mysql:
-    image: mysql:8
-    container_name: mysql_container
-    restart: always
-    env_file: .env
+  db:
+    container_name: 'postgres'
+    image: postgres
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    ports:
-      - "3306:3306"
+      POSTGRES_DB: forum_db  # 設定要建立的資料庫名稱
+      POSTGRES_USER: root    # 設定使用者名稱
+      POSTGRES_PASSWORD: root
     volumes:
-      - mysql_data:/var/lib/mysql
-
-  springboot:
-    build: .
-    image: my-springboot-app
-    env_file:
-      - .env  # 引用 .env 文件
-    environment:
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      # SMTP
-      MAIL_USERNAME: ${MAIL_USERNAME}
-      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      - pgdata:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+  web:
+    container_name: 'spring-docker-demo'
+    build: ./
+#    image: spring-docker-jar:latest
+    entrypoint: ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    restart: always
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
-    networks:
-      - app-network
+      - db
+    environment:
+      MAIL_USERNAME: outrunner234@gmail.com
+      MAIL_PASSWORD: qrbaerrhltxphshz
 
 volumes:
-  mysql_data:
-
-networks:
-  app-network:
-    driver: bridge
+  pgdata:

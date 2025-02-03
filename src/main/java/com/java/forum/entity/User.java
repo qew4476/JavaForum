@@ -7,7 +7,7 @@ import java.time.Instant;
 import java.util.List;
 
 @Entity
-@Table(name = "user", schema = "forum_db")
+@Table(name = "user")
 public class User {
     @Id
     @Column(name = "id", nullable = false)
