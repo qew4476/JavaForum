@@ -3,15 +3,15 @@ services:
     container_name: 'postgres'
     image: postgres
     environment:
-      POSTGRES_DB: forum_db  # 設定要建立的資料庫名稱
-      POSTGRES_USER: root    # 設定使用者名稱
-      POSTGRES_PASSWORD: root
+      POSTGRES_DB: ${DB_NAME}  # database name
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - pgdata:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
   web:
-    container_name: 'spring-docker-demo'
+    container_name: 'spring-docker'
     build: ./
 #    image: spring-docker-jar:latest
     entrypoint: ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
@@ -21,8 +21,13 @@ services:
     depends_on:
       - db
     environment:
-      MAIL_USERNAME: outrunner234@gmail.com
-      MAIL_PASSWORD: qrbaerrhltxphshz
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      SPRING_SQL_INIT_MODE: always
 
 volumes:
   pgdata:
