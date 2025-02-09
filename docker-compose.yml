@@ -10,16 +10,28 @@ services:
       - pgdata:/var/lib/postgresql/data/
     ports:
       - "5432:5432"
+
+  redis:
+    container_name: 'redis'
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+
   web:
     container_name: 'spring-docker'
     build: ./
-#    image: spring-docker-jar:latest
+    #    image: spring-docker-jar:latest
     entrypoint: ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
     restart: always
     ports:
       - "8080:8080"
     depends_on:
       - db
+      - redis
     environment:
       MAIL_USERNAME: ${MAIL_USERNAME}
       MAIL_PASSWORD: ${MAIL_PASSWORD}
@@ -28,6 +40,9 @@ services:
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
       SPRING_SQL_INIT_MODE: always
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
 
 volumes:
   pgdata:
+  redis_data:
