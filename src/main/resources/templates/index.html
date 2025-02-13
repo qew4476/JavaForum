@@ -96,7 +96,7 @@
                             <b th:text="${#dates.format(map.post.createTime, 'MM-dd-yyyy HH:mm:ss')}">07-04-2024
                                 15:32:18</b>
                             <ul class="d-inline float-right">
-                                <li class="d-inline ml-2">Like(5)</li>
+                                <li class="d-inline ml-2">Like(<i th:text="${map.likeCount}">1</i>)</li>
                                 <li class="d-inline ml-2">|</li>
                                 <li class="d-inline ml-2">Reply(<i th:text="${map.post.commentCount}"></i>)</li>
                             </ul>

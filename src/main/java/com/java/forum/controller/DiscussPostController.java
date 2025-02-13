@@ -7,6 +7,7 @@ import com.java.forum.entity.User;
 import com.java.forum.entity.DiscussPost;
 import com.java.forum.service.CommentService;
 import com.java.forum.service.DiscussPostService;
+import com.java.forum.service.LikeService;
 import com.java.forum.service.UserService;
 import com.java.forum.util.ForumUtil;
 import com.java.forum.util.HostHolder;
@@ -43,6 +44,9 @@ public class DiscussPostController {
     @Autowired
     private HostHolder hostHolder;
 
+    @Autowired
+    private LikeService likeService;
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     @LoginRequired
@@ -71,6 +75,14 @@ public class DiscussPostController {
         //The user who posted the post
         User user = discussPost.getUser();
         model.addAttribute("user", user);
+        //Like details
+        long likeCount = likeService.findEntityLikeCount(ENTITY_TYPE_POST, discussPostId);
+        model.addAttribute("likeCount",likeCount);
+
+        //if the user is not logged in, the status is 0
+        int likeStatus = hostHolder.getUser() == null ? 0 :
+                likeService.findEntityLikeStatus(hostHolder.getUser().getId(),ENTITY_TYPE_POST,discussPostId);
+        model.addAttribute("likeStatus",likeStatus);
 
         //Comment pagination information
         page.setPostDisplayLimit(5);
@@ -92,6 +104,14 @@ public class DiscussPostController {
                 //User
                 commentVo.put("user", comment.getUser());
 
+                //Like details
+                likeCount = likeService.findEntityLikeCount(ENTITY_TYPE_COMMENT, comment.getId());
+                commentVo.put("likeCount", likeCount);
+                //if the user is not logged in, the status is 0
+                likeStatus = hostHolder.getUser() == null ? 0 :
+                        likeService.findEntityLikeStatus(hostHolder.getUser().getId(),ENTITY_TYPE_COMMENT,comment.getId());
+                commentVo.put("likeStatus",likeStatus);
+
 
                 //reply list
                 List<Comment> replyList = commentService.findCommentsByEntity(
@@ -110,6 +130,14 @@ public class DiscussPostController {
                         //targetUser: the user who is replied to
                         User targetUser = reply.getTarget_id() == 0 ? null : userService.findUserById(reply.getTarget_id());
                         replyVo.put("targetUser", targetUser);
+
+                        //Like details
+                        likeCount = likeService.findEntityLikeCount(ENTITY_TYPE_COMMENT, reply.getId());
+                        replyVo.put("likeCount", likeCount);
+                        //if the user is not logged in, the status is 0
+                        likeStatus = hostHolder.getUser() == null ? 0 :
+                                likeService.findEntityLikeStatus(hostHolder.getUser().getId(),ENTITY_TYPE_COMMENT,reply.getId());
+                        replyVo.put("likeStatus",likeStatus);
 
                         replyVoList.add(replyVo);
 

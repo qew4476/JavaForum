@@ -43,8 +43,8 @@
                         <ul class="d-inline float-right">
                             <li class="d-inline ml-2">
                                 <a href="javascript:;" th:onclick="|like(this,1, ${discussPost.id});|" class="text-primary">
-                                     <b>Like</b>(<i>11</i>)
-                                    <i th:text="'('+${discussPost.commentCount}+')'"></i></a></li>
+                                     <b th:text="${likeStatus==1?'Liked':'Like'}">Like</b>(<i th:text="${likeCount}"></i>)
+                                    </a></li>
                             <li class="d-inline ml-2">|</li>
                             <li class="d-inline ml-2"><a href="#replyform" class="text-primary">Reply (<i
                                     th:text="${discussPost.commentCount}"></i>)</a></li>
@@ -92,7 +92,7 @@
                             <ul class="d-inline float-right">
                                 <li class="d-inline ml-2">
                                     <a href="javascript:;" th:onclick="|like(this,2,${cvo.comment.id});|" class="text-primary">
-                                        <b>Like</b> (<i>1</i>)
+                                        <b th:text="${cvo.likeStatus==1?'Liked':'Like'}">Like</b> (<i th:text="${cvo.likeCount}">1</i>)
                                     </a></li>
                                 <li class="d-inline ml-2">|</li>
                                 <li class="d-inline ml-2"><a href="#" class="text-primary">Reply(<i
@@ -119,7 +119,7 @@
                                     <ul class="d-inline float-right">
                                         <li class="d-inline ml-2"><a
                                                 href="javascript:;" th:onclick="|like(this,2, ${rvo.reply.id})|" class="text-primary">
-                                            <b>Like</b>(<i>1</i>)
+                                            <b th:text="${rvo.likeStatus==1?'Liked':'Like'}">Like</b>(<i th:text="${rvo.likeCount}">1</i>)
                                         </a></li>
                                         <li class="d-inline ml-2">|</li>
                                         <li class="d-inline ml-2"><a th:href="'#reply-'+${rvoStat.count}"
