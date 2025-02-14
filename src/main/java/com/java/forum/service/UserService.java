@@ -2,7 +2,6 @@ package com.java.forum.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.java.forum.dao.UserDao;
 import com.java.forum.entity.LoginTicket;
 import com.java.forum.entity.User;

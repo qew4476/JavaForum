@@ -30,10 +30,10 @@
             <li class="nav-item ml-3 btn-group-vertical">
               <a class="nav-link" th:href="@{/index}">Home Page</a>
             </li>
-            <li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser!=null}">
-              <a class="nav-link position-relative" href="site/letter.html">Message<span
-                      class="badge badge-danger">12</span></a>
-            </li>
+<!--            <li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser!=null}">-->
+<!--              <a class="nav-link position-relative" href="site/letter.html">Message<span-->
+<!--                      class="badge badge-danger">12</span></a>-->
+<!--            </li>-->
             <li class="nav-item ml-3 btn-group-vertical" th:if="${loginUser==null}">
               <a class="nav-link" th:href="@{/register}">Register</a>
             </li>
@@ -47,7 +47,7 @@
                      style="width:30px;"/>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item text-center" th:href="@{/site/profile}">Personal homepage</a>
+<!--                <a class="dropdown-item text-center" th:href="@{/site/profile}">Personal homepage</a>-->
                 <a class="dropdown-item text-center" th:href="@{/user/setting}">User settings</a>
                 <a class="dropdown-item text-center" th:href="@{/logout}">Log out</a>
                 <div class="dropdown-divider"></div>
