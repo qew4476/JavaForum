@@ -1,21 +1,21 @@
 package com.java.forum.service;
 
-import com.java.forum.dao.LoginTicketDao;
 import com.java.forum.dao.UserDao;
 import com.java.forum.entity.LoginTicket;
 import com.java.forum.entity.User;
 import com.java.forum.util.ForumConstant;
 import com.java.forum.util.ForumUtil;
 import com.java.forum.util.MailClient;
+import com.java.forum.util.RedisKeyUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 import java.time.Instant;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -23,8 +23,11 @@ import java.util.Optional;
 @Service
 public class UserService implements ForumConstant {
 
+//    @Autowired
+//    private LoginTicketDao loginTicketDao;
+
     @Autowired
-    private LoginTicketDao loginTicketDao;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     private UserDao userDao;
@@ -146,14 +149,13 @@ public class UserService implements ForumConstant {
 
         LoginTicket loginTicket = new LoginTicket();
         loginTicket.setUser(user);
-        String ticket;
-        do {
-            ticket = ForumUtil.generateUUID();
-        } while (loginTicketDao.selectByTicket(ticket) != null);
         loginTicket.setTicket(ForumUtil.generateUUID());
         loginTicket.setStatus(0);   // 0: valid; 1: invalid
         loginTicket.setExpired(Instant.now().plusSeconds(expiredSeconds));
-        loginTicketDao.insertLoginTicket(loginTicket);
+//        loginTicketDao.insertLoginTicket(loginTicket);
+        String redisKey = RedisKeyUtil.getTicketKey(loginTicket.getTicket());
+        redisTemplate.opsForValue().set(redisKey, loginTicket);
+
         map.put("ticket", loginTicket.getTicket());
 
 
@@ -162,11 +164,17 @@ public class UserService implements ForumConstant {
     }
 
     public void logout(String ticket) {
-        loginTicketDao.updateStatus(ticket, 1);
+//        loginTicketDao.updateStatus(ticket, 1);
+        String redisKey = RedisKeyUtil.getTicketKey(ticket);
+        LoginTicket loginTicket = (LoginTicket) redisTemplate.opsForValue().get(redisKey);
+        loginTicket.setStatus(1);
+        redisTemplate.opsForValue().set(redisKey, loginTicket);
     }
 
     public LoginTicket findLoginTicket(String ticket) {
-        return loginTicketDao.selectByTicket(ticket);
+//        return loginTicketDao.selectByTicket(ticket);
+        String redisKey = RedisKeyUtil.getTicketKey(ticket);
+        return (LoginTicket) redisTemplate.opsForValue().get(redisKey);
     }
 
     public int updateHeader(int userId, String headerUrl){

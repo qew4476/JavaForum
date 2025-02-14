@@ -22,6 +22,7 @@ public class LoginTicket {
     @Column(name = "status")
     private Integer status;
 
+
     @Column(name = "expired", nullable = false)
     private Instant expired;
 

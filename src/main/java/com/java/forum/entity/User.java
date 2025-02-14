@@ -38,6 +38,7 @@ public class User {
     @Column(name = "header_url", length = 200)
     private String headerUrl;
 
+
     @Column(name = "create_time")
     private Instant createTime;
 
