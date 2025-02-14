@@ -31,6 +31,9 @@ public class UserService implements ForumConstant {
 //    private LoginTicketDao loginTicketDao;
 
     @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
@@ -171,8 +174,7 @@ public class UserService implements ForumConstant {
     public void logout(String ticket) {
 //        loginTicketDao.updateStatus(ticket, 1);
         String redisKey = RedisKeyUtil.getTicketKey(ticket);
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
+
         Object obj = redisTemplate.opsForValue().get(redisKey);
         LoginTicket loginTicket = objectMapper.convertValue(obj, LoginTicket.class);
         loginTicket.setStatus(1);
@@ -182,8 +184,6 @@ public class UserService implements ForumConstant {
     public LoginTicket findLoginTicket(String ticket) {
 //        return loginTicketDao.selectByTicket(ticket);
         String redisKey = RedisKeyUtil.getTicketKey(ticket);
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
         Object obj = redisTemplate.opsForValue().get(redisKey);
         return objectMapper.convertValue(obj, LoginTicket.class);
 
