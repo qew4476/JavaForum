@@ -5,7 +5,7 @@ import com.java.forum.entity.LoginTicket;
 @Deprecated
 public interface LoginTicketDao {
 
-    int insertLoginTicket(LoginTicket loginTicket);
+//    int insertLoginTicket(LoginTicket loginTicket);
 
     LoginTicket selectByTicket(String ticket);
 

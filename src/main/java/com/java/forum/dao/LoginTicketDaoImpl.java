@@ -13,12 +13,12 @@ public class LoginTicketDaoImpl implements LoginTicketDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    @Override
-    @Transactional
-    public int insertLoginTicket(LoginTicket loginTicket) {
-        entityManager.persist(loginTicket);
-        return loginTicket.getId();
-    }
+//    @Override
+//    @Transactional
+//    public int insertLoginTicket(LoginTicket loginTicket) {
+//        entityManager.persist(loginTicket);
+//        return loginTicket.getId();
+//    }
 
     @Override
     public LoginTicket selectByTicket(String ticket) {

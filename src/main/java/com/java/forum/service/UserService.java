@@ -1,5 +1,8 @@
 package com.java.forum.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.java.forum.dao.UserDao;
 import com.java.forum.entity.LoginTicket;
 import com.java.forum.entity.User;
@@ -17,6 +20,7 @@ import org.thymeleaf.context.Context;
 
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -118,7 +122,7 @@ public class UserService implements ForumConstant {
         }
     }
 
-    public Map<String, Object> login(String username, String password, int expiredSeconds) {
+    public Map<String, Object> login(String username, String password, int expiredSeconds) throws JsonProcessingException {
         Map<String, Object> map = new HashMap<>();
 
         if (StringUtils.isBlank(username)) {
@@ -148,13 +152,14 @@ public class UserService implements ForumConstant {
         }
 
         LoginTicket loginTicket = new LoginTicket();
-        loginTicket.setUser(user);
+        loginTicket.setUserId(user.getId());
         loginTicket.setTicket(ForumUtil.generateUUID());
         loginTicket.setStatus(0);   // 0: valid; 1: invalid
         loginTicket.setExpired(Instant.now().plusSeconds(expiredSeconds));
 //        loginTicketDao.insertLoginTicket(loginTicket);
         String redisKey = RedisKeyUtil.getTicketKey(loginTicket.getTicket());
         redisTemplate.opsForValue().set(redisKey, loginTicket);
+
 
         map.put("ticket", loginTicket.getTicket());
 
@@ -166,7 +171,10 @@ public class UserService implements ForumConstant {
     public void logout(String ticket) {
 //        loginTicketDao.updateStatus(ticket, 1);
         String redisKey = RedisKeyUtil.getTicketKey(ticket);
-        LoginTicket loginTicket = (LoginTicket) redisTemplate.opsForValue().get(redisKey);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        Object obj = redisTemplate.opsForValue().get(redisKey);
+        LoginTicket loginTicket = objectMapper.convertValue(obj, LoginTicket.class);
         loginTicket.setStatus(1);
         redisTemplate.opsForValue().set(redisKey, loginTicket);
     }
@@ -174,7 +182,11 @@ public class UserService implements ForumConstant {
     public LoginTicket findLoginTicket(String ticket) {
 //        return loginTicketDao.selectByTicket(ticket);
         String redisKey = RedisKeyUtil.getTicketKey(ticket);
-        return (LoginTicket) redisTemplate.opsForValue().get(redisKey);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        Object obj = redisTemplate.opsForValue().get(redisKey);
+        return objectMapper.convertValue(obj, LoginTicket.class);
+
     }
 
     public int updateHeader(int userId, String headerUrl){

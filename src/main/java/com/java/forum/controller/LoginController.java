@@ -1,5 +1,6 @@
 package com.java.forum.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.code.kaptcha.Producer;
 import com.java.forum.entity.User;
 import com.java.forum.service.UserService;
@@ -126,7 +127,7 @@ public class LoginController implements ForumConstant {
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(String username, String password, String code, boolean rememberMe,
                         Model model, /*HttpSession session,*/ HttpServletResponse response,
-                        @CookieValue("kaptchaOwner") String kaptchaOwner) {
+                        @CookieValue("kaptchaOwner") String kaptchaOwner) throws JsonProcessingException {
         //verify the kaptcha
         //String kaptcha = (String) session.getAttribute("kaptcha");
         String kaptcha = null;

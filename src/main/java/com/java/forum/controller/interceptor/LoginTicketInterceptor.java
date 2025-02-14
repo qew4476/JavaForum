@@ -33,7 +33,7 @@ public class LoginTicketInterceptor implements HandlerInterceptor {
             //verify whether this login is valid
             if (loginTicket != null && loginTicket.getStatus() == 0 && loginTicket.getExpired().isAfter(Instant.now())) {
                 //find the user with loginTicket
-                User user = loginTicket.getUser();
+                User user = userService.findUserById(loginTicket.getUserId());
                 //hold the user in this request
                 hostHolder.setUser(user);
             }

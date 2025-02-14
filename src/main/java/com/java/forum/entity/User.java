@@ -1,5 +1,6 @@
 package com.java.forum.entity;
 
+
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -37,6 +38,7 @@ public class User {
 
     @Column(name = "header_url", length = 200)
     private String headerUrl;
+
 
 
     @Column(name = "create_time")

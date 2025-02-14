@@ -1,5 +1,7 @@
 package com.java.forum.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -8,13 +10,12 @@ import java.time.Instant;
 @Table(name = "login_ticket")
 public class LoginTicket {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(name = "user_id", nullable = false)
+    private int userId;
 
     @Column(name = "ticket", nullable = false, length = 45)
     private String ticket;
@@ -23,8 +24,19 @@ public class LoginTicket {
     private Integer status;
 
 
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
     @Column(name = "expired", nullable = false)
     private Instant expired;
+
+    public LoginTicket() {
+    }
+
+    public LoginTicket(int userId, String ticket, Integer status, Instant expired) {
+        this.userId = userId;
+        this.ticket = ticket;
+        this.status = status;
+        this.expired = expired;
+    }
 
     public Integer getId() {
         return id;
@@ -34,12 +46,12 @@ public class LoginTicket {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getTicket() {
