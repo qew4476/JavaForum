@@ -23,11 +23,11 @@
             <h6 class="mb-4">
                 <img src="http://static.nowcoder.com/images/img/icons/ico-discuss.png"/>
                 <span th:utext="${discussPost.title}">Post title</span>
-                <div class="float-right">
-                    <button type="button" class="btn btn-danger btn-sm">Pin</button>
-                    <button type="button" class="btn btn-danger btn-sm">Hightlight</button>
-                    <button type="button" class="btn btn-danger btn-sm">Delete</button>
-                </div>
+<!--                <div class="float-right">-->
+<!--                    <button type="button" class="btn btn-danger btn-sm">Pin</button>-->
+<!--                    <button type="button" class="btn btn-danger btn-sm">Hightlight</button>-->
+<!--                    <button type="button" class="btn btn-danger btn-sm">Delete</button>-->
+<!--                </div>-->
             </h6>
             <!-- Writer -->
             <div class="media pb-3 border-bottom">
@@ -95,7 +95,7 @@
                                         <b th:text="${cvo.likeStatus==1?'Liked':'Like'}">Like</b> (<i th:text="${cvo.likeCount}">1</i>)
                                     </a></li>
                                 <li class="d-inline ml-2">|</li>
-                                <li class="d-inline ml-2"><a href="#" class="text-primary">Reply(<i
+                                <li class="d-inline ml-2"><a class="text-primary">Reply(<i
                                         th:text="${cvo.replyCount}">2</i>)</a></li>
                             </ul>
                         </div>
