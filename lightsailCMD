@@ -1,0 +1,6 @@
+ssh -i "C:\Users\state\Desktop\Code_Workspace\LightsailDefaultKey-ap-northeast-2.pem" ubuntu@43.203.253.201
+scp -i "C:\Users\state\Desktop\Code_Workspace\LightsailDefaultKey-ap-northeast-2.pem" "C:\Users\state\Desktop\Code_Workspace\forum\target\forum-0.0.1-SNAPSHOT.jar" ubuntu@43.203.253.201:apps/forum/target
+scp -i "C:\Users\state\Desktop\Code_Workspace\LightsailDefaultKey-ap-northeast-2.pem" "C:\Users\state\Desktop\Code_Workspace\forum\docker-compose.yml" ubuntu@43.203.253.201:apps/forum
+scp -i "C:\Users\state\Desktop\Code_Workspace\LightsailDefaultKey-ap-northeast-2.pem" "C:\Users\state\Desktop\Code_Workspace\forum\Dockerfile" ubuntu@43.203.253.201:apps/forum
+scp -i "C:\Users\state\Desktop\Code_Workspace\LightsailDefaultKey-ap-northeast-2.pem" "C:\Users\state\Desktop\Code_Workspace\forum\.env" ubuntu@43.203.253.201:apps/forum
+
