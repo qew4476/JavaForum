@@ -87,6 +87,7 @@ public class UserService implements ForumConstant {
         existUser = Optional.ofNullable(userDao.selectByEmail(user.getEmail()));
         if (existUser.isPresent()) {
             map.put("emailMsg", "The email is already registered.");
+            return map;
         }
 
 
