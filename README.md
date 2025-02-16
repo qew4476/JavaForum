@@ -4,10 +4,10 @@ This is a forum web application allows users to create posts, comment, interact 
 It is built using **Spring Boot**, **PostgreSQL**, **Redis**, and **Nginx**, among others.
 # Tech Stack
 ## Backend
-* Spring Boot
-* PostgreSQL
-* Redis: Like, Login
-* Nginx
+* **Spring Boot**
+* **PostgreSQL**
+* **Redis**: Like, Login
+* **Nginx**
 * AWS Lightsail
 * AWS S3: upload avatars
 ## Frontend
