@@ -5,7 +5,7 @@ It is built using **Spring Boot**, **PostgreSQL**, **Redis**, and **Nginx**, amo
 # Tech Stack
 ## Backend
 * **Spring Boot**
-* **PostgreSQL**
+* **PostgreSQL**: interact with Hibernate
 * **Redis**: Like, Login
 * **Nginx**
 * AWS Lightsail
