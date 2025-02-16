@@ -12,7 +12,7 @@ It is built using **Spring Boot**, **PostgreSQL**, **Redis**, and **Nginx**, amo
 * AWS S3: upload avatars
 ## Frontend
 * Thymeleaf
-* jquery
+* jQuery
 * Bootstrap
 
 # Features
