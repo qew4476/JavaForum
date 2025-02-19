@@ -1,6 +1,6 @@
 # Overview
 [DEMO LINK](http://43.203.253.201/javaforum/index) in AWS Lightsail<br>
-[Introducion Slides](https://docs.google.com/presentation/d/1vBYzRyBnD6QBtBVS1ucBg5lsLNLAGAN6iVPz-sTVbyA/edit?usp=sharing)<br>
+[Introduction Slides](https://docs.google.com/presentation/d/1vBYzRyBnD6QBtBVS1ucBg5lsLNLAGAN6iVPz-sTVbyA/edit?usp=sharing)<br>
 This is a forum web application allows users to create posts, comment, interact with content, etc. <br>
 It is built using **Spring Boot**, **PostgreSQL**, **Redis**, and **Nginx**, among others.
 # Tech Stack
